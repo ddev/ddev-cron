@@ -1,0 +1,10 @@
+# Install required packages
+webimage_extra_packages: [cron]
+
+hooks:
+  # This will be executed at the whenever DDEV starts
+  post-start:
+    # This line creates a job, ddev-cron-time, and configures it to run every minute
+    - exec: echo '*/1 * * * * root date | tee -a /var/www/html/time.log' | sudo tee -a /etc/cron.d/ddev-cron-time
+    # This line sets permissions ands starts the cron service
+    - exec: sudo chmod 0600 /etc/cron.d/ddev-cron-time && sudo service cron start
