@@ -1,9 +1,10 @@
 setup() {
   set -eu -o pipefail
+
   export DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )/.."
-  export TESTDIR=~/tmp/testelasticsearch
+  export TESTDIR=~/tmp/ddev-cron
   mkdir -p $TESTDIR
-  export PROJNAME=test-ddev-cron
+  export PROJNAME=ddev-cron
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} || true
   cd "${TESTDIR}"
@@ -24,16 +25,18 @@ teardown() {
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR}
   ddev restart
-  # Do something here to verify functioning extra service
-  # For extra credit, use a real CMS with actual config.
-  # ddev exec "curl -s elasticsearch:9200" | grep "${PROJNAME}-elasticsearch"
+
+  # ASSERT: Service has started
+  ddev exec service cron status | grep "cron is running."
 }
 
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get drud/ddev-ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get drud/ddev-ddev-cron
+  echo "# ddev get tyler36/ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev get tyler36/ddev-cron
   ddev restart
-  # ddev exec "curl -s elasticsearch:9200" | grep "${PROJNAME}-elasticsearch"
+
+  # ASSERT: Service has started
+  ddev exec service cron status | grep "cron is running."
 }
