@@ -1,0 +1,6 @@
+ARG BASE_IMAGE
+FROM $BASE_IMAGE
+# Install cron package; this can be done in webimage_extra_packages, but put it here for now.
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::="--force-confold" --no-install-recommends --no-install-suggests cron
+# Tell supervisord to start cron service in cron.conf
+ADD cron.conf /etc/supervisor/conf.d
