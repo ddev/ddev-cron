@@ -13,9 +13,9 @@ The add-on
 * Installs and runs the cron service inside the web container
 * Adds a sample cron configuration that adds to a file every minute.
 
-> **Warning**
-> If you already have a `.ddev/web-build/Dockerfile` in your project, you'll want to adapt it with
-> the one provided here, and `ddev get` will override the one you have.
+**Warning**
+If you already have a `.ddev/web-build/Dockerfile` in your project, you'll want to adapt it with
+the one provided here, and `ddev get` will override the one you have.
 
 
 This extension is designed to be a generic implentation. See [Running TYPO3 Cron inside the web container](https://github.com/drud/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.
