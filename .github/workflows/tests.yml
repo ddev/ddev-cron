@@ -2,7 +2,7 @@ name: tests
 on:
   pull_request:
   push:
-    branches: [ master, main ]
+    branches: [ main, 20220529_auto_install ]
 
   schedule:
   - cron: '01 07 * * *'
