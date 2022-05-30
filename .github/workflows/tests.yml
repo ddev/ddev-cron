@@ -2,7 +2,7 @@ name: tests
 on:
   pull_request:
   push:
-    branches: [ master, main ]
+    branches: [ main, 20220529_auto_install ]
 
   schedule:
   - cron: '01 07 * * *'
@@ -39,8 +39,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Environment setup
       run: |
-        brew install bats-core mkcert
-        mkcert -install
+        brew install bats-core
 
     - name: Use ddev stable
       if: matrix.ddev_version == 'stable'
@@ -53,13 +52,6 @@ jobs:
     - name: Use ddev HEAD
       if: matrix.ddev_version == 'HEAD'
       run: brew install --HEAD drud/ddev/ddev
-
-    - name: Use ddev PR
-      if: matrix.ddev_version == 'PR'
-      run: |
-        curl -sSL -o ddev_linux.zip ${NIGHTLY_DDEV_PR_URL}
-        unzip ddev_linux.zip
-        mv ddev /usr/local/bin/ddev && chmod +x /usr/local/bin/ddev
 
     - name: Download docker images
       run: | 

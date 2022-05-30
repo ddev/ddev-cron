@@ -9,9 +9,9 @@ pre_install_actions:
 
 # list of files and directories listed that are copied into project .ddev directory
 project_files:
-- config.cron.yml
-# - extra_files/
-# - somefile.sh
+- config.cron.yaml
+- web-build
+
 
 # List of files and directories that are copied into the global .ddev directory
 global_files:

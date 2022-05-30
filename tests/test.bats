@@ -9,7 +9,8 @@ setup() {
   ddev delete -Oy ${PROJNAME} || true
   cd "${TESTDIR}"
   ddev config --project-name=${PROJNAME}
-  ddev start
+  ddev start -y
+  echo "# ddev started at $(date)" >&3
 }
 
 teardown() {
@@ -26,8 +27,11 @@ teardown() {
   ddev get ${DIR}
   ddev restart
 
-  # ASSERT: Service has started
-  ddev exec service cron status | grep "cron is running."
+  sleep 61
+ # Make sure cron process is running
+  ddev exec 'sudo killall -0 cron'
+ # ASSERT: Make sure time.log got a line written to it.
+  grep UTC time.log
 }
 
 @test "install from release" {
@@ -37,6 +41,9 @@ teardown() {
   ddev get tyler36/ddev-cron
   ddev restart
 
-  # ASSERT: Service has started
-  ddev exec service cron status | grep "cron is running."
+  sleep 61
+ # Make sure cron process is running
+  ddev exec 'sudo killall -0 cron'
+ # ASSERT: Make sure time.log got a line written to it.
+  grep UTC time.log
 }
