@@ -12,31 +12,22 @@ This DDEV add-on helps to execute a command in the web container based on a cron
 The add-on 
 * Installs and runs the cron service inside the web container
 * Adds a sample cron configuration that adds to a file every minute.
+* Required DDEV v1.19.3 or higher.
 
-**Warning**
-If you already have a `.ddev/web-build/Dockerfile` in your project, you'll want to adapt it with
-the one provided here, and `ddev get` will override the one you have.
-
-
-This extension is designed to be a generic implentation. See [Running TYPO3 Cron inside the web container](https://github.com/drud/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.
+*This extension is designed to be a generic implentation. See [Running TYPO3 Cron inside the web container](https://github.com/drud/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.*
 
 ## Getting started
 
-- Install the add-on
-
-```shell
-ddev get tyler36/cron
-```
-
-- Update the provided `./.ddev/config.cron.yaml` as you see fit with your expected cron jobs (and remove the demonstration line). You can also just add the demonstration lines to your `.ddev/config.yaml`.
+- Install the add-on with `ddev get tyler36/ddev-cron`
+- Update the provided `.ddev/config.cron.yaml` as you see fit with your expected cron jobs (and remove the demonstration line). You can also just add those demonstration lines to your `.ddev/config.yaml` and delete the `.ddev/config.cron.yaml`.
 - `ddev restart`
 
 
 ## Implementation
 
-The provided `web-build/Dockerfile` and `web-build/cron.conf` configure the traditional cron daemon to run inside the web container.
+The provided `web-build/Dockerfile.ddev-cron` and `web-build/cron.conf` configure the traditional cron daemon to run inside the web container.
 
-The `config.cron.yaml` is a simple implentation of cron within the DDEV web container. It writes a crontab file to configure the cron daemon.
+The `config.cron.yaml` is a simple setup of a trivial cron job within the DDEV web container. It writes a crontab file to configure the cron daemon.
 
 ```yaml
 hooks:
