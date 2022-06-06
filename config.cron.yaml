@@ -1,5 +1,5 @@
 hooks:
-  # This will be executed at the whenever DDEV starts
+  # This will be executed whenever DDEV starts
   post-start:
     # This line creates a job, ddev-cron-time, and configures it to run every minute
     # You can just `ls -l time.log` or `tail time.log` to see it happening.
