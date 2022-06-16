@@ -2,6 +2,7 @@ name: ddev-cron
 
 pre_install_actions:
 - |
+  #ddev-nooutput
   if ! ( ddev debug capabilities 2>/dev/null | grep multiple-dockerfiles >/dev/null 2>&1 ) ; then
     echo "This add-on requires DDEV v1.19.3 or higher, please upgrade." && exit 2
   fi
@@ -14,9 +15,7 @@ project_files:
 
 # List of files and directories that are copied into the global .ddev directory
 global_files:
-# - commands
-# - homeadditions
+
 
 post_install_actions:
-# - chmod +x ~/.ddev/commands/web/somecommand
-# - perl -pi -e 's/oldstring/newstring/g' docker-compose.ddev-cron.yaml
+

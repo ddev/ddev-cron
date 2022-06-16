@@ -1,3 +1,4 @@
+#ddev-generated
 hooks:
   # This will be executed whenever DDEV starts
   post-start:
