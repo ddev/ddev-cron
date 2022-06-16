@@ -1,7 +1,21 @@
-#ddev-generated
-hooks:
-  # This will be executed whenever DDEV starts
-  post-start:
-    # This line creates a job, ddev-cron-time, and configures it to run every minute
-    # You can just `ls -l time.log` or `tail time.log` to see it happening.
-    - exec: echo '* * * * * root date | tee -a /var/www/html/time.log' | sudo tee -a /etc/cron.d/ddev-cron-time
+name: ddev-browsersync
+
+pre_install_actions:
+- | 
+  #ddev-nodisplay
+  if ! ( ddev debug capabilities 2>/dev/null | grep multiple-dockerfiles >/dev/null 2>&1 ) ; then
+    echo "This add-on requires DDEV v1.19.3 or higher, please upgrade." && exit 2
+  fi
+
+project_files:
+  - docker-compose.browsersync.yaml
+  - web-build/Dockerfile.ddev-browsersync
+  - browser-sync.js
+
+
+global_files:
+  - commands
+
+
+post_install_actions:
+
