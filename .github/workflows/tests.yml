@@ -54,7 +54,7 @@ jobs:
       run: brew install --HEAD drud/ddev/ddev
 
     - name: Download docker images
-      run: | 
+      run: |
         mkdir junk && pushd junk && ddev config --auto && ddev debug download-images >/dev/null
         docker pull memcached:1.6 >/dev/null
     - name: tmate debugging session
@@ -67,3 +67,6 @@ jobs:
     - name: tests
       run: bats tests
 
+    # keepalive-workflow adds a dummy commit if there's no other action here, keeps
+    # GitHub from turning off tests after 60 days
+    - uses: gautamkrishnar/keepalive-workflow@v1
