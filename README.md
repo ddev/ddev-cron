@@ -1,6 +1,7 @@
-[![tests](https://github.com/tyler36/ddev-cron/actions/workflows/tests.yml/badge.svg)](https://github.com/tyler36/ddev-cron/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2022.svg)
+[![tests](https://github.com/drud/ddev-cron/actions/workflows/tests.yml/badge.svg)](https://github.com/tyler36/ddev-cron/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2022.svg)
 
 # DDEV-CRON <!-- omit in toc -->
+
 - [Intro](#intro)
 - [Getting started](#getting-started)
 - [Implementation](#implementation)
@@ -9,19 +10,19 @@
 
 This DDEV add-on helps to execute a command in the web container based on a cron schedule. Cron is a classic Linux/Unix service with a well-known configuration syntax.
 
-The add-on 
-* Installs and runs the cron service inside the web container
-* Adds a sample cron configuration that adds to a file every minute.
-* Required DDEV v1.19.3 or higher.
+The add-on
+
+- Installs and runs the cron service inside the web container
+- Adds a sample cron configuration that adds to a file every minute.
+- Required DDEV v1.19.3 or higher.
 
 *This extension is designed to be a generic implentation. See [Running TYPO3 Cron inside the web container](https://github.com/drud/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.*
 
 ## Getting started
 
-- Install the add-on with `ddev get tyler36/ddev-cron`
+- Install the add-on with `ddev get drud/ddev-cron`
 - Update the provided `.ddev/config.cron.yaml` as you see fit with your expected cron jobs (and remove the demonstration line). You can also just add those demonstration lines to your `.ddev/config.yaml` and delete the `.ddev/config.cron.yaml`.
 - `ddev restart`
-
 
 ## Implementation
 
