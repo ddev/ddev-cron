@@ -33,11 +33,15 @@ The `config.cron.yaml` is a simple setup of a trivial cron job within the DDEV w
 ```yaml
 hooks:
   post-start:
-      # This line creates a cron job, ddev-cron-time, and configures it to run every minute
-    - exec: echo '*/1 * * * * root date | tee -a /var/www/html/time.log' | sudo tee -a /etc/cron.d/ddev-cron-time
+    # This adds an every-minute cronjob for your user; it runs "date" and appends that
+    # to the "date.log" in your project root.
+    # You can just `ls -l date.log` or `tail -f date.log` to see it happening.
+    # The crontab can have more than one line for multiple jobs.
+    # `ddev exec crontab -l` will show you the current crontab configuration
+    - exec: echo "* * * * * date | tee -a /var/www/html/date.log" | crontab
 ```
 
-The default file configures a job (`ddev-cron-time`) to write the date to a log file `time.log` every minute.
+The default file configures a job to write the date to a log file `date.log` every minute.
 It is a simple arbitary example to show the service is working, and remind the user to change it to something more appropriate. You can add additional files into /etc/cron.d, or add additional lines to this one.
 
 **Contributed and maintained by [@tyler36](https://github.com/tyler36) based on the original [Running TYPO3 Cron inside the web container](https://github.com/drud/ddev-contrib/tree/master/recipes/cronjob) by [@thomaskieslich](https://github.com/thomaskieslich)**
