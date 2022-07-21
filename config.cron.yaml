@@ -4,8 +4,8 @@
 hooks:
   post-start:
     # This adds an every-minute cronjob for your user; it runs "date" and appends that
-    # to the "date.log" in your project root.
-    # You can just `ls -l date.log` or `tail -f date.log` to see it happening.
+    # to the "time.log" in your project root.
+    # You can just `ls -l time.log` or `tail -f time.log` to see it happening.
     # The crontab can have more than one line for multiple jobs.
     # `ddev exec crontab -l` will show you the current crontab configuration
-    - exec: printf "SHELL=/bin/bash\n* * * * * date | tee -a /var/www/html/date.log\n" | crontab
+    - exec: printf "SHELL=/bin/bash\n* * * * * date | tee -a /var/www/html/time.log\n" | crontab
