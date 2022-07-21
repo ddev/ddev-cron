@@ -31,13 +31,13 @@ teardown() {
  # Make sure cron process is running
   ddev exec 'sudo killall -0 cron'
  # ASSERT: Make sure time.log got a line written to it.
-  grep UTC time.log
+  grep UTC date.log
 }
 
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get drud/ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  echo "# ddev get tyler36/ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get drud/ddev-cron
   ddev restart
 
@@ -45,5 +45,5 @@ teardown() {
  # Make sure cron process is running
   ddev exec 'sudo killall -0 cron'
  # ASSERT: Make sure time.log got a line written to it.
-  grep UTC time.log
+  grep UTC date.log
 }
