@@ -8,4 +8,4 @@ hooks:
     # You can just `ls -l date.log` or `tail -f date.log` to see it happening.
     # The crontab can have more than one line for multiple jobs.
     # `ddev exec crontab -l` will show you the current crontab configuration
-    - exec: echo "* * * * * date | tee -a /var/www/html/date.log" | crontab
+    - exec: printf "SHELL=/bin/bash\n* * * * * date | tee -a /var/www/html/date.log\n" | crontab
