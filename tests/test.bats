@@ -37,7 +37,7 @@ teardown() {
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get tyler36/ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  echo "# ddev get drud/ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get drud/ddev-cron
   ddev restart
 
