@@ -1,7 +1,11 @@
 #ddev-generated
+# Remove the line above if you don't want this file to be overwritten when you run
+# ddev get drud/ddev-cron
 hooks:
-  # This will be executed whenever DDEV starts
   post-start:
-    # This line creates a job, ddev-cron-time, and configures it to run every minute
-    # You can just `ls -l time.log` or `tail time.log` to see it happening.
-    - exec: echo '* * * * * root date | tee -a /var/www/html/time.log' | sudo tee -a /etc/cron.d/ddev-cron-time
+    # This adds an every-minute cronjob for your user; it runs "date" and appends that
+    # to the "time.log" in your project root.
+    # You can just `ls -l time.log` or `tail -f time.log` to see it happening.
+    # The crontab can have more than one line for multiple jobs.
+    # `ddev exec crontab -l` will show you the current crontab configuration
+    - exec: printf "SHELL=/bin/bash\n* * * * * date | tee -a /var/www/html/time.log\n" | crontab

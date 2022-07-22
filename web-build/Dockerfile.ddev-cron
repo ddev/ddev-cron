@@ -3,3 +3,5 @@
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y -o Dpkg::Options::="--force-confold" --no-install-recommends --no-install-suggests cron
 # Tell supervisord to start cron service in cron.conf
 ADD cron.conf /etc/supervisor/conf.d
+# Make it so you can add to cron.d without root privileges
+RUN chmod 777 /etc/cron.d /var/run
