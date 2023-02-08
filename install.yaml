@@ -12,7 +12,6 @@ project_files:
 - config.cron.yaml
 - web-build/Dockerfile.ddev-cron
 
-
 # List of files and directories that are copied into the global .ddev directory
 global_files:
 
