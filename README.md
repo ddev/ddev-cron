@@ -1,10 +1,11 @@
-[![tests](https://github.com/drud/ddev-cron/actions/workflows/tests.yml/badge.svg)](https://github.com/drud/ddev-cron/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2022.svg)
+[![tests](https://github.com/ddev/ddev-cron/actions/workflows/tests.yml/badge.svg)](https://github.com/ddev/ddev-cron/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2022.svg)
 
 # DDEV-CRON <!-- omit in toc -->
 
 - [Intro](#intro)
 - [Getting started](#getting-started)
 - [Implementation](#implementation)
+- [Examples](#examples)
 
 ## Intro
 
@@ -16,11 +17,11 @@ The add-on
 - Adds a sample cron configuration that adds to a file every minute.
 - Required DDEV v1.19.3 or higher.
 
-*This extension is designed to be a generic implentation. See [Running TYPO3 Cron inside the web container](https://github.com/drud/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.*
+*This extension is designed to be a generic implentation. See [Running TYPO3 Cron inside the web container](https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.*
 
 ## Getting started
 
-- Install the add-on with `ddev get drud/ddev-cron`
+- Install the add-on with `ddev get ddev/ddev-cron`
 - Update the provided `.ddev/config.cron.yaml` as you see fit with your expected cron jobs (and remove the demonstration line). You can also just add those demonstration lines to your `.ddev/config.yaml` and delete the `.ddev/config.cron.yaml`.
 - `ddev restart`
 
@@ -44,12 +45,12 @@ hooks:
 The default file configures a job to write the date to a log file `time.log` every minute.
 It is a simple arbitary example to show the service is working, and remind the user to change it to something more appropriate. You can add additional files into /etc/cron.d, or add additional lines to this one.
 
-* If you need help figuring out the syntax of a cron job, see [crontab guru](https://crontab.guru/).
-* For the usage of `crontab` see [crontab man page](https://manpages.debian.org/buster/cron/crontab.1.en.html).
-* You can experiment with the `crontab` command inside the container by `ddev ssh` and then `crontab -e` for example, or use `ddev exec crontab -e`.
-* If you want the cron to run on your local time instead of UTC, make sure to set `timezone` in your `.ddev/config.yaml`.
-* Make sure that when you have tried manually executing the command you want to run inside the container and that it gets the expected results.
-* If you are running a CMS command that requires access to the database, set the environment variable `IS_DDEV_PROJECT=true`
+- If you need help figuring out the syntax of a cron job, see [crontab guru](https://crontab.guru/).
+- For the usage of `crontab` see [crontab man page](https://manpages.debian.org/buster/cron/crontab.1.en.html).
+- You can experiment with the `crontab` command inside the container by `ddev ssh` and then `crontab -e` for example, or use `ddev exec crontab -e`.
+- If you want the cron to run on your local time instead of UTC, make sure to set `timezone` in your `.ddev/config.yaml`.
+- Make sure that when you have tried manually executing the command you want to run inside the container and that it gets the expected results.
+- If you are running a CMS command that requires access to the database, set the environment variable `IS_DDEV_PROJECT=true`
 
 ## Examples
 
@@ -59,7 +60,9 @@ It is a simple arbitary example to show the service is working, and remind the u
   - exec: printf "SHELL=/bin/bash\n* * * * * date |& tee -a /var/www/html/time.log\n* * * * * IS_DDEV_PROJECT=true /var/www/html/vendor/bin/typo3 scheduler:run -vv |& tee -a /var/www/html/scheduler-log.txt\n" | crontab
 
 ```
+
 See the results of this with `ddev exec crontab -l`:
+
 ```
 SHELL=/bin/bash
 * * * * * date |& tee -a /var/www/html/time.log
@@ -72,7 +75,6 @@ SHELL=/bin/bash
   - exec: printf "SHELL=/bin/bash\n*/10 * * * * IS_DDEV_PROJECT=true DDEV_PHP_VERSION=8.0 /var/www/html/vendor/bin/drush cron -v |& tee -a /var/www/html/cron-log.txt\n" | crontab
 ```
 
+**Contributed and maintained by [@tyler36](https://github.com/tyler36) based on the original [Running TYPO3 Cron inside the web container](https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob) by [@thomaskieslich](https://github.com/thomaskieslich)**
 
-**Contributed and maintained by [@tyler36](https://github.com/tyler36) based on the original [Running TYPO3 Cron inside the web container](https://github.com/drud/ddev-contrib/tree/master/recipes/cronjob) by [@thomaskieslich](https://github.com/thomaskieslich)**
-
-**Originally Contributed by [@thomaskieslich](https://github.com/thomaskieslich) in <https://github.com/drud/ddev-contrib/tree/master/recipes/cronjob>)**
+**Originally Contributed by [@thomaskieslich](https://github.com/thomaskieslich) in <https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob>)**
