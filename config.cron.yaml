@@ -1,6 +1,6 @@
 #ddev-generated
 # Remove the line above if you don't want this file to be overwritten when you run
-# ddev get drud/ddev-cron
+# ddev get ddev/ddev-cron
 hooks:
   post-start:
     # This adds an every-minute cronjob for your user; it runs "date" and appends that
