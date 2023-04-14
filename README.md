@@ -69,6 +69,13 @@ SHELL=/bin/bash
 * * * * * cd /var/www/html && IS_DDEV_PROJECT=true vendor/bin/typo3 scheduler:run -vv |& tee -a /var/www/html/scheduler-log.txt
 ```
 
+**Laravel scheduler**: A cron to run the Laravel scheduler every minute would be:
+
+```yaml
+  - exec: printf "SHELL=/bin/bash\n* * * * * cd /var/www/html && php artisan schedule:run >> /dev/null 2>&1\n" | crontab
+
+```
+
 **Drupal cron**: A cron to run drupal's cron every 10 minutes via drush might be:
 
 ```yaml
