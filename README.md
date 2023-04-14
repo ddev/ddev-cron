@@ -72,7 +72,7 @@ SHELL=/bin/bash
 **Laravel scheduler**: A cron to run the Laravel scheduler every minute would be:
 
 ```yaml
-  - exec: printf "SHELL=/bin/bash\n* * * * * cd /var/www/html && php artisan schedule:run >> /dev/null 2>&1\n" | crontab
+  - exec: printf "SHELL=/bin/bash\n* * * * * cd /var/www/html && IS_DDEV_PROJECT=true php artisan schedule:run >> /dev/null 2>&1\n" | crontab
 
 ```
 
