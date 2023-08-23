@@ -34,16 +34,16 @@ teardown() {
   grep UTC time.log
 }
 
-#@test "install from release" {
-#  set -eu -o pipefail
-#  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-#  echo "# ddev get ddev/ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-#  ddev get ddev/ddev-cron
-#  ddev restart
-#
-#  sleep 61
-# # Make sure cron process is running
-#  ddev exec 'sudo killall -0 cron'
-# # ASSERT: Make sure time.log got a line written to it.
-#  grep UTC time.log
-#}
+@test "install from release" {
+  set -eu -o pipefail
+  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
+  echo "# ddev get ddev/ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev get ddev/ddev-cron
+  ddev restart
+
+  sleep 61
+  # Make sure cron process is running
+  ddev exec 'sudo killall -0 cron'
+  # ASSERT: Make sure time.log got a line written to it.
+  grep UTC time.log
+}
