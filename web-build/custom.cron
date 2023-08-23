@@ -1,0 +1,2 @@
+#ddev-generated
+* * * * * date | tee -a /var/www/html/time.log
