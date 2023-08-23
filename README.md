@@ -2,22 +2,22 @@
 
 # DDEV-CRON <!-- omit in toc -->
 
-- [Intro](#intro)
+- [Introduction](#introduction)
 - [Getting started](#getting-started)
 - [Implementation](#implementation)
 - [Examples](#examples)
 
-## Intro
+## Introduction
 
 This DDEV add-on helps to execute a command in the web container based on a cron schedule. Cron is a classic Linux/Unix service with a well-known configuration syntax.
 
-The add-on
+The add-on:
 
 - Installs and runs the cron service inside the web container
 - Adds a sample cron configuration that adds to a file every minute.
 - Required DDEV v1.19.3 or higher.
 
-*This extension is designed to be a generic implentation. See [Running TYPO3 Cron inside the web container](https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.*
+*This extension is designed to be a generic implementation. See [Running TYPO3 Cron inside the web container](https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.*
 
 ## Getting started
 
@@ -43,7 +43,7 @@ hooks:
 ```
 
 The default file configures a job to write the date to a log file `time.log` every minute.
-It is a simple arbitary example to show the service is working, and remind the user to change it to something more appropriate. You can add additional files into /etc/cron.d, or add additional lines to this one.
+It is a simple arbitrary example to show the service is working, and remind the user to change it to something more appropriate. You can add additional files into /etc/cron.d, or add additional lines to this one.
 
 - If you need help figuring out the syntax of a cron job, see [crontab guru](https://crontab.guru/).
 - For the usage of `crontab` see [crontab man page](https://manpages.debian.org/buster/cron/crontab.1.en.html).
