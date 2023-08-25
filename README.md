@@ -34,7 +34,7 @@ The add-on:
   - Remove `#ddev-generated` to prevent DDEV from overriding the file.
 - Customize the cron service, if required, by updating `./.ddev/web-build/cron.conf`
   - Remove `#ddev-generated` to prevent DDEV from overriding the file.
-- Restart DDEV to apply any changes:
+- Restart DDEV to apply changes:
 
   ```shell
   ddev restart
