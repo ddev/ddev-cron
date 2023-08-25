@@ -75,6 +75,8 @@ See `.ddev/web-build/time.cron.example` and [Examples](#examples) section below 
 ## Useful sites and debugging
 
 - [crontab guru](https://crontab.guru/) is a helpful for generating cron schedule expressions.
+- For `crontab` usage, see [crontab man page](https://manpages.debian.org/buster/cron/crontab.1.en.html).
+- Check crontab by running `ddev exec crontab -e`.
 - If you want the cron to run on your local time instead of UTC, make sure to set `timezone` in your `.ddev/config.yaml`.
 - To help debug, connect to the web container session (`ddev ssh`) and manually run the commands to confirm expected results.
 - If you are running a CMS command that requires access to the database, set the environment variable `IS_DDEV_PROJECT=true`

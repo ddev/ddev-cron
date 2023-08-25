@@ -35,6 +35,9 @@ teardown() {
   ddev exec 'sudo killall -0 cron'
  # ASSERT: Make sure time.log got a line written to it.
   grep UTC time.log
+
+  # ASSERT job displays under current user's crontab
+  ddev exec crontab -l | grep '* * * * * date | tee -a /var/www/html/time.log'
 }
 
 @test "install from release" {
@@ -52,6 +55,9 @@ teardown() {
   ddev exec 'sudo killall -0 cron'
   # ASSERT: Make sure time.log got a line written to it.
   grep UTC time.log
+
+  # ASSERT job displays under current user's crontab
+  ddev exec crontab -l | grep '* * * * * date | tee -a /var/www/html/time.log'
 }
 
 @test "services work when no valid jobs are present" {

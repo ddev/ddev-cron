@@ -15,4 +15,4 @@ COPY ./*.cron /etc/cron.d/*.cron
 RUN chmod -f 0644 /etc/cron.d/*.cron || true
 
 # Concatenate files
-RUN { cat /etc/cron.d/*.cron; } | crontab -
+RUN { cat /etc/cron.d/*.cron; } | crontab -u ${username} -
