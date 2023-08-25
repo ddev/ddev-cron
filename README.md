@@ -27,7 +27,7 @@ The add-on:
 - Install the DDEV cron add-on:
 
   ```shell
-  ddev get ddev/ddev-browsersync
+  ddev get ddev/ddev-cron
   ```
 
 - Update `./.ddev/web-build/custom.cron` with your required commands.
