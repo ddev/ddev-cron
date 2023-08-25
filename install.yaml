@@ -11,7 +11,7 @@ pre_install_actions:
 project_files:
 - web-build/Dockerfile.ddev-cron
 - web-build/cron.conf
-- web-build/custom.cron
+- web-build/time.cron.example
 
 # List of files and directories that are copied into the global .ddev directory
 global_files:

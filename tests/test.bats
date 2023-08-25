@@ -25,8 +25,11 @@ teardown() {
   cd ${TESTDIR}
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR}
+  # Set the example cron job as an actual cron job.
+  mv ./.ddev/web-build/time.cron.example ./.ddev/web-build/time.cron
   ddev restart
 
+  # The example runs every minute so we should wait at least the length.
   sleep 61
  # Make sure cron process is running
   ddev exec 'sudo killall -0 cron'
@@ -39,11 +42,27 @@ teardown() {
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
   echo "# ddev get ddev/ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ddev/ddev-cron
+  # Set the example cron job as an actual cron job.
+  mv ./.ddev/web-build/time.cron.example ./.ddev/web-build/time.cron
   ddev restart
 
+  # The example runs every minute so we should wait at least the length.
   sleep 61
   # Make sure cron process is running
   ddev exec 'sudo killall -0 cron'
   # ASSERT: Make sure time.log got a line written to it.
   grep UTC time.log
+}
+
+@test "services work when no valid jobs are present" {
+  set -eu -o pipefail
+  cd ${TESTDIR}
+  echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev get ${DIR}
+  ddev restart
+
+  # We should wait at least one cycle.
+  sleep 61
+  # Make sure cron process is running
+  ddev exec 'sudo killall -0 cron'
 }

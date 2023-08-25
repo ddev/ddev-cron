@@ -14,5 +14,5 @@ COPY ./*.cron /etc/cron.d/*.cron
 # Give execution rights on the cron jobs
 RUN chmod -f 0644 /etc/cron.d/*.cron || true
 
-# Apply cron jobs
-RUN crontab /etc/cron.d/*.cron || true
+# Concatenate files
+RUN { cat /etc/cron.d/*.cron; } | crontab -
