@@ -9,7 +9,7 @@ COPY ./cron.conf /etc/supervisor/conf.d/cron.conf
 RUN chmod 777 /etc/cron.d /var/run
 
 # Copy over our custom jobs
-COPY ./*.cron /etc/cron.d/*.cron
+COPY ./*.cron /etc/cron.d/
 
 # Give execution rights on the cron jobs
 RUN chmod -f 0644 /etc/cron.d/*.cron || true
