@@ -21,7 +21,6 @@ The add-on:
 
 - Installs and runs the cron service inside the web container
 - Adds an example job that writes out the current time.
-- Required DDEV v1.19.3 or higher.
 
 *This extension is designed to be a generic implementation. See [Running TYPO3 Cron inside the web container](https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.*
 
