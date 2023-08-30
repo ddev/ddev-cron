@@ -45,7 +45,7 @@ The add-on:
 
 ## Implementation
 
-This extension does the follow:
+This extension does the following:
 
 - Adds required cron service to the web container.
 - Configures the cron service using `./ddev/web-build/cron.conf`.
