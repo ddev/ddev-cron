@@ -5,7 +5,6 @@
 - [Introduction](#introduction)
 - [Getting started](#getting-started)
 - [Implementation](#implementation)
-  - [./ddev/web-build/cron.conf](#ddevweb-buildcronconf)
   - [\*.cron](#cron)
 - [Useful sites and debugging](#useful-sites-and-debugging)
 - [Examples](#examples)
@@ -51,14 +50,6 @@ This extension does the following:
 - Configures the cron service using `./ddev/web-build/cron.conf`.
 - Adds all `./ddev/web-build/*.cron` files to crontab scheduler.
 
-### ./ddev/web-build/cron.conf
-
-This addon provides basic configuration for the cron service out of the box.
-
-To change the configuration for the cron service, update `./ddev/web-build/cron.conf`:
-
-- Remove `#ddev-generated` to prevent DDEV from overriding the file.
-- Make any required changes.
 
 ### *.cron
 
