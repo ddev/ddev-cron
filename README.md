@@ -32,8 +32,6 @@ The add-on:
   ddev get ddev/ddev-cron
   ```
 
-- Customize the cron service, if required, by updating `./.ddev/web-build/cron.conf`
-  - Remove `#ddev-generated` to prevent DDEV from overriding the file.
 - Add at least one `./ddev/web-build/*.cron` file. This will be automatically added to crontab on startup. See [Implementation](#implementation)
 - Restart DDEV to apply changes:
 
