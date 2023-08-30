@@ -47,7 +47,6 @@ This extension does the following:
 - Configures the cron service using `./ddev/web-build/cron.conf`.
 - Adds all `./ddev/web-build/*.cron` files to crontab scheduler.
 
-
 ### *.cron
 
 This addon uses `*.cron` files to populate crontab. This allows projects to track and manage cron jobs via git.
