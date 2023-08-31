@@ -2,77 +2,111 @@
 
 # DDEV-CRON <!-- omit in toc -->
 
-- [Intro](#intro)
+- [Introduction](#introduction)
 - [Getting started](#getting-started)
 - [Implementation](#implementation)
+  - [\*.cron](#cron)
+- [Useful sites and debugging](#useful-sites-and-debugging)
 - [Examples](#examples)
+  - [Logging current time](#logging-current-time)
+  - [TYPO3 scheduler](#typo3-scheduler)
+  - [Drupal cron](#drupal-cron)
+  - [Laravel cron](#laravel-cron)
 
-## Intro
+## Introduction
 
 This DDEV add-on helps to execute a command in the web container based on a cron schedule. Cron is a classic Linux/Unix service with a well-known configuration syntax.
 
-The add-on
+The add-on:
 
 - Installs and runs the cron service inside the web container
-- Adds a sample cron configuration that adds to a file every minute.
-- Required DDEV v1.19.3 or higher.
+- Adds an example job that writes out the current time.
 
-*This extension is designed to be a generic implentation. See [Running TYPO3 Cron inside the web container](https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.*
+*This extension is designed to be a generic implementation. See [Running TYPO3 Cron inside the web container](https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob) for a specific example of a manual setup.*
 
 ## Getting started
 
-- Install the add-on with `ddev get ddev/ddev-cron`
-- Update the provided `.ddev/config.cron.yaml` as you see fit with your expected cron jobs (and remove the demonstration line). You can also just add those demonstration lines to your `.ddev/config.yaml` and delete the `.ddev/config.cron.yaml`.
-- `ddev restart`
+- Install the DDEV cron add-on:
+
+  ```shell
+  ddev get ddev/ddev-cron
+  ```
+
+- Add at least one `./ddev/web-build/*.cron` file. This will be automatically added to crontab on startup. See [Implementation](#implementation)
+- Restart DDEV to apply changes:
+
+  ```shell
+  ddev restart
+  ```
 
 ## Implementation
 
-The provided `web-build/Dockerfile.ddev-cron` and `web-build/cron.conf` configure the traditional cron daemon to run inside the web container.
+This extension does the following:
 
-The `config.cron.yaml` is a simple setup of a trivial cron job within the DDEV web container. It writes a crontab file to configure the cron daemon.
+- Adds required cron service to the web container.
+- Configures the cron service using `./ddev/web-build/cron.conf`.
+- Adds all `./ddev/web-build/*.cron` files to crontab scheduler.
 
-```yaml
-hooks:
-  post-start:
-    # This adds an every-minute cronjob for your user; it runs "date" and appends that
-    # to the "time.log" in your project root.
-    # You can just `ls -l time.log` or `tail -f time.log` to see it happening.
-    # The crontab can have more than one line for multiple jobs.
-    # `ddev exec crontab -l` will show you the current crontab configuration
-    - exec: printf "SHELL=/bin/bash\n* * * * * date >> /var/www/html/time.log\n" | crontab
-```
+### *.cron
 
-The default file configures a job to write the date to a log file `time.log` every minute.
-It is a simple arbitary example to show the service is working, and remind the user to change it to something more appropriate. You can add additional files into /etc/cron.d, or add additional lines to this one.
+This addon uses `*.cron` files to populate crontab. This allows projects to track and manage cron jobs via git.
 
-- If you need help figuring out the syntax of a cron job, see [crontab guru](https://crontab.guru/).
-- For the usage of `crontab` see [crontab man page](https://manpages.debian.org/buster/cron/crontab.1.en.html).
-- You can experiment with the `crontab` command inside the container by `ddev ssh` and then `crontab -e` for example, or use `ddev exec crontab -e`.
+On `ddev start`, all `./ddev/web-build/*.cron` files are:
+
+- Copied into the `/etc/cron.d`.
+- Have their permissions updated.
+- Added to crontab.
+
+See `.ddev/web-build/time.cron.example` and [Examples](#examples) section below for specific example.
+
+## Useful sites and debugging
+
+- [crontab guru](https://crontab.guru/) is a helpful for generating cron schedule expressions.
+- For `crontab` usage, see [crontab man page](https://manpages.debian.org/buster/cron/crontab.1.en.html).
+- Check crontab by running `ddev exec crontab -l`.
 - If you want the cron to run on your local time instead of UTC, make sure to set `timezone` in your `.ddev/config.yaml`.
-- Make sure that when you have tried manually executing the command you want to run inside the container and that it gets the expected results.
+- To help debug, connect to the web container session (`ddev ssh`) and manually run the commands to confirm expected results.
 - If you are running a CMS command that requires access to the database, set the environment variable `IS_DDEV_PROJECT=true`
 
 ## Examples
 
-**TYPO3 scheduler**: A cron to add on to the example and then run the TYPO3 scheduler every minute might be:
+The following examples are provide as guides.
+PRs are welcome for changes and updates for current best practices for specific frameworks.
 
-```yaml
-  - exec: printf "SHELL=/bin/bash\n* * * * * date |& tee -a /var/www/html/time.log\n* * * * * IS_DDEV_PROJECT=true /var/www/html/vendor/bin/typo3 scheduler:run -vv |& tee -a /var/www/html/scheduler-log.txt\n" | crontab
+### Logging current time
 
+This addon provides an example that can check if the cron service is running.
+Every minute, it writes the current time (UTC timezone) to `./time.log`.
+
+- Rename `./ddev/web-build/time.cron.example` to `./ddev/web-build/time.cron`
+- Restart the DDEV project to start the time example.
+- After at least a minute, you should see `./time.log` containing the web container's current time.
+
+### TYPO3 scheduler
+
+- Create a `./.ddev/web-build/typo3.cron` file
+- Add the following code to run the typo3 scheduler every minute and write to a log file.
+
+```cron
+  * * * * * cd /var/www/html && IS_DDEV_PROJECT=true vendor/bin/typo3 scheduler:run -vv |& tee -a /var/www/html/scheduler-log.txt
 ```
 
-See the results of this with `ddev exec crontab -l`:
+### Drupal cron
 
+- Create a `./.ddev/web-build/drupal.cron` file
+- Add the following code to run the drupal scheduler every 10 minute and write to a log file.
+
+```cron
+*/10 * * * * IS_DDEV_PROJECT=true DDEV_PHP_VERSION=8.0 /var/www/html/vendor/bin/drush cron -v |& tee -a /var/www/html/cron-log.txt
 ```
-SHELL=/bin/bash
-* * * * * date |& tee -a /var/www/html/time.log
-* * * * * cd /var/www/html && IS_DDEV_PROJECT=true vendor/bin/typo3 scheduler:run -vv |& tee -a /var/www/html/scheduler-log.txt
-```
 
-**Drupal cron**: A cron to run drupal's cron every 10 minutes via drush might be:
+### Laravel cron
 
-```yaml
-  - exec: printf "SHELL=/bin/bash\n*/10 * * * * IS_DDEV_PROJECT=true DDEV_PHP_VERSION=8.0 /var/www/html/vendor/bin/drush cron -v |& tee -a /var/www/html/cron-log.txt\n" | crontab
+- Create a `./.ddev/web-build/drupal.cron` file
+- Add the following code to run the drupal scheduler minute.
+
+```cron
+* * * * * cd /var/www/html && IS_DDEV_PROJECT=true php artisan schedule:run >> /dev/null 2>&1
 ```
 
 **Contributed and maintained by [@tyler36](https://github.com/tyler36) based on the original [Running TYPO3 Cron inside the web container](https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob) by [@thomaskieslich](https://github.com/thomaskieslich)**
