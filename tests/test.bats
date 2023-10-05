@@ -21,7 +21,9 @@ teardown() {
 }
 
 health_checks() {
-  # Make sure cron process is running
+  # Make sure cron process is running.
+  # We use `time_cron_checks` to check the example cron job is actually correctly implemented.
+  # This is due to the need to test the health-check when there are no jobs added.
   ddev exec 'sudo killall -0 cron'
 }
 
