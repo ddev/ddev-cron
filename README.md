@@ -109,6 +109,17 @@ Every minute, it writes the current time (UTC timezone) to `./time.log`.
 * * * * * cd /var/www/html && IS_DDEV_PROJECT=true php artisan schedule:run >> /dev/null 2>&1
 ```
 
+### WordPress cron
+
+- Create a `./.ddev/web-build/wordpress.cron` file
+- Add the following code to trigger the WordPress scheduler.
+
+```cron
+*/15 * * * * IS_DDEV_PROJECT=true DDEV_PHP_VERSION=8.1 cd /var/www/html && /usr/local/bin/wp cron event run --due-now 2>&1 | tee -a /var/www/html/cron.log
+```
+- This configuration will run the WordPress scheduler every 15 minutes and will create a `cron.log` file in the root of your project
+
+
 **Contributed and maintained by [@tyler36](https://github.com/tyler36) based on the original [Running TYPO3 Cron inside the web container](https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob) by [@thomaskieslich](https://github.com/thomaskieslich)**
 
 **Originally Contributed by [@thomaskieslich](https://github.com/thomaskieslich) in <https://github.com/ddev/ddev-contrib/tree/master/recipes/cronjob>)**
