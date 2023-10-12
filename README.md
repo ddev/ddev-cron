@@ -12,6 +12,7 @@
   - [TYPO3 scheduler](#typo3-scheduler)
   - [Drupal cron](#drupal-cron)
   - [Laravel cron](#laravel-cron)
+  - [WordPress cron](#wordpress-cron)
 
 ## Introduction
 
