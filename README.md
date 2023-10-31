@@ -96,9 +96,10 @@ Every minute, it writes the current time (UTC timezone) to `./time.log`.
 
 - Create a `./.ddev/web-build/drupal.cron` file
 - Add the following code to run the drupal scheduler every 10 minutes and write to a log file.
+  - `DDEV_PHP_VERSION` value must match your project's PHP version.
 
 ```cron
-*/10 * * * * IS_DDEV_PROJECT=true /var/www/html/vendor/bin/drush cron | tee -a /var/www/html/cron-log.txt
+*/10 * * * * IS_DDEV_PROJECT=true DDEV_PHP_VERSION=8.1 /var/www/html/vendor/bin/drush cron | tee -a /var/www/html/cron-log.txt
 ```
 
 ### Laravel cron
