@@ -89,7 +89,7 @@ Every minute, it writes the current time (UTC timezone) to `./time.log`.
 - Add the following code to run the typo3 scheduler every minute and write to a log file.
 
 ```cron
-  * * * * * cd /var/www/html && IS_DDEV_PROJECT=true vendor/bin/typo3 scheduler:run -vv |& tee -a /var/www/html/scheduler-log.txt
+* * * * * cd /var/www/html && IS_DDEV_PROJECT=true vendor/bin/typo3 scheduler:run -vv | tee -a /var/www/html/scheduler-log.txt
 ```
 
 ### Drupal cron
