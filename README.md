@@ -11,6 +11,7 @@
   - [Logging current time](#logging-current-time)
   - [TYPO3 scheduler](#typo3-scheduler)
   - [Drupal cron](#drupal-cron)
+  - [OpenMage cron](#openmage-cron)
   - [Laravel cron](#laravel-cron)
   - [WordPress cron](#wordpress-cron)
 
@@ -109,6 +110,15 @@ Every minute, it writes the current time (UTC timezone) to `./time.log`.
 
 ```cron
 * * * * * cd /var/www/html && IS_DDEV_PROJECT=true php artisan schedule:run >> /dev/null 2>&1
+```
+
+### OpenMage cron
+
+- Create a `./.ddev/web-build/openmage.cron` file
+- Add the following code to run the OpenMage scheduler every minute.
+
+```cron
+* * * * * /var/www/html/cron.sh
 ```
 
 ### WordPress cron
