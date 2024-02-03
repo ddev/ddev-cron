@@ -11,8 +11,8 @@
   - [Logging current time](#logging-current-time)
   - [TYPO3 scheduler](#typo3-scheduler)
   - [Drupal cron](#drupal-cron)
-  - [OpenMage cron](#openmage-cron)
   - [Laravel cron](#laravel-cron)
+  - [OpenMage cron](#openmage-cron)
   - [WordPress cron](#wordpress-cron)
 
 ## Introduction
