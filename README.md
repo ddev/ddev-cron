@@ -9,9 +9,10 @@
 - [Useful sites and debugging](#useful-sites-and-debugging)
 - [Examples](#examples)
   - [Logging current time](#logging-current-time)
-  - [TYPO3 scheduler](#typo3-scheduler)
   - [Drupal cron](#drupal-cron)
   - [Laravel cron](#laravel-cron)
+  - [OpenMage cron](#openmage-cron)
+  - [TYPO3 scheduler](#typo3-scheduler)
   - [WordPress cron](#wordpress-cron)
 
 ## Introduction
@@ -83,15 +84,6 @@ Every minute, it writes the current time (UTC timezone) to `./time.log`.
 - Restart the DDEV project to start the time example.
 - After at least a minute, you should see `./time.log` containing the web container's current time.
 
-### TYPO3 scheduler
-
-- Create a `./.ddev/web-build/typo3.cron` file
-- Add the following code to run the typo3 scheduler every minute and write to a log file.
-
-```cron
-* * * * * cd /var/www/html && IS_DDEV_PROJECT=true vendor/bin/typo3 scheduler:run -vv | tee -a /var/www/html/scheduler-log.txt
-```
-
 ### Drupal cron
 
 - Create a `./.ddev/web-build/drupal.cron` file
@@ -109,6 +101,24 @@ Every minute, it writes the current time (UTC timezone) to `./time.log`.
 
 ```cron
 * * * * * cd /var/www/html && IS_DDEV_PROJECT=true php artisan schedule:run >> /dev/null 2>&1
+```
+
+### OpenMage cron
+
+- Create a `./.ddev/web-build/openmage.cron` file
+- Add the following code to run the OpenMage scheduler every minute.
+
+```cron
+* * * * * /var/www/html/cron.sh
+```
+
+### TYPO3 scheduler
+
+- Create a `./.ddev/web-build/typo3.cron` file
+- Add the following code to run the typo3 scheduler every minute and write to a log file.
+
+```cron
+* * * * * cd /var/www/html && IS_DDEV_PROJECT=true vendor/bin/typo3 scheduler:run -vv | tee -a /var/www/html/scheduler-log.txt
 ```
 
 ### WordPress cron
