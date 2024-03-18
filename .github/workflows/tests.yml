@@ -16,7 +16,7 @@ on:
 
 # Permissions required for keepalive-workflow in ddev/github-action-add-on-test
 permissions:
-  contents: write
+  actions: write
 
 jobs:
   tests:
