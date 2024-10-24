@@ -30,6 +30,14 @@ The add-on:
 
 - Install the DDEV cron add-on:
 
+  For DDEV v1.23.5 or above run
+
+  ```shell
+  ddev add-on get ddev/ddev-cron
+  ```
+
+  For earlier versions of DDEV run
+
   ```shell
   ddev get ddev/ddev-cron
   ```
