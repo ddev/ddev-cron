@@ -38,8 +38,8 @@ time_cron_checks() {
 @test "install from directory" {
   set -eu -o pipefail
   cd ${TESTDIR}
-  echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get ${DIR}
+  echo "# ddev add-on get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev add-on get ${DIR}
   # Set the example cron job as an actual cron job.
   mv ./.ddev/web-build/time.cron.example ./.ddev/web-build/time.cron
   ddev restart
@@ -57,8 +57,8 @@ time_cron_checks() {
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get ddev/ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get ddev/ddev-cron
+  echo "# ddev add-on get ddev/ddev-cron with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev add-on get ddev/ddev-cron
   # Set the example cron job as an actual cron job.
   mv ./.ddev/web-build/time.cron.example ./.ddev/web-build/time.cron
   ddev restart
@@ -76,8 +76,8 @@ time_cron_checks() {
 @test "services work when no valid jobs are present" {
   set -eu -o pipefail
   cd ${TESTDIR}
-  echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get ${DIR}
+  echo "# ddev add-on get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev add-on get ${DIR}
   ddev restart
 
   # We should wait at least one cycle.
