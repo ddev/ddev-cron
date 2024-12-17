@@ -42,7 +42,7 @@ The add-on:
   ddev get ddev/ddev-cron
   ```
 
-- Add at least one `./ddev/web-build/*.cron` file. This will be automatically added to crontab on startup. See [Implementation](#implementation)
+- Add at least one `.ddev/web-build/*.cron` file. This will be automatically added to crontab on startup. See [Implementation](#implementation)
 - Restart DDEV to apply changes:
 
   ```shell
@@ -54,14 +54,14 @@ The add-on:
 This extension does the following:
 
 - Adds required cron service to the web container.
-- Configures the cron service using `./ddev/web-build/cron.conf`.
-- Adds all `./ddev/web-build/*.cron` files to crontab scheduler.
+- Configures the cron service using `.ddev/web-build/cron.conf`.
+- Adds all `.ddev/web-build/*.cron` files to crontab scheduler.
 
 ### *.cron
 
 This addon uses `*.cron` files to populate crontab. This allows projects to track and manage cron jobs via git.
 
-On `ddev start`, all `./ddev/web-build/*.cron` files are:
+On `ddev start`, all `.ddev/web-build/*.cron` files are:
 
 - Copied into the `/etc/cron.d`.
 - Have their permissions updated.
@@ -88,7 +88,7 @@ PRs are welcome for changes and updates for current best practices for specific 
 This addon provides an example that can check if the cron service is running.
 Every minute, it writes the current time (UTC timezone) to `./time.log`.
 
-- Rename `./ddev/web-build/time.cron.example` to `./ddev/web-build/time.cron`
+- Rename `.ddev/web-build/time.cron.example` to `.ddev/web-build/time.cron`
 - Restart the DDEV project to start the time example.
 - After at least a minute, you should see `./time.log` containing the web container's current time.
 
