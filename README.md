@@ -87,6 +87,16 @@ Every minute, it writes the current time (UTC timezone) to `./time.log`.
 - Restart the DDEV project to start the time example.
 - After at least a minute, you should see `./time.log` containing the web container's current time.
 
+### Contao cron
+
+- Create a `./.ddev/web-build/contao.cron` file
+- Add the following code to run the Contao scheduler every minute.
+  - Adjust `php8.4` to match your DDEV project's PHP version
+
+```cron
+* * * * * /usr/bin/php8.4 /var/www/html/vendor/bin/contao-console contao:cron
+```
+
 ### Drupal cron
 
 - Create a `./.ddev/web-build/drupal.cron` file
