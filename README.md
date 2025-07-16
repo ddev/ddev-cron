@@ -92,10 +92,9 @@ Every minute, it writes the current time (UTC timezone) to `./time.log`.
 
 - Create a `./.ddev/web-build/contao.cron` file
 - Add the following code to run the Contao scheduler every minute.
-  - Adjust `php8.4` to match your DDEV project's PHP version
 
 ```cron
-* * * * * /usr/bin/php8.4 /var/www/html/vendor/bin/contao-console contao:cron
+* * * * * php /var/www/html/vendor/bin/contao-console contao:cron
 ```
 
 ### Drupal cron
