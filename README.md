@@ -12,6 +12,7 @@
 - [Useful sites and debugging](#useful-sites-and-debugging)
 - [Examples](#examples)
   - [Logging current time](#logging-current-time)
+  - [Contao cron](#contao-cron)
   - [Drupal cron](#drupal-cron)
   - [Laravel cron](#laravel-cron)
   - [OpenMage cron](#openmage-cron)
