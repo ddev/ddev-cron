@@ -125,6 +125,15 @@ Every minute, it writes the current time (UTC timezone) to `./time.log`.
 * * * * * /var/www/html/cron.sh
 ```
 
+### Magento 2 / Mage-OS cron
+
+- Create a `./.ddev/web-build/magento.cron` file
+- Add the following code to run the Magento scheduler every minute.
+
+```cron
+* * * * * php /var/www/html/bin/magento cron:run
+```
+
 ### TYPO3 scheduler
 
 - Create a `./.ddev/web-build/typo3.cron` file
