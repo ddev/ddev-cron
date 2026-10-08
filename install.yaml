@@ -5,4 +5,4 @@ project_files:
   - web-build/cron.conf
   - web-build/time.cron.example
 
-ddev_version_constraint: '>= v1.24.3'
+ddev_version_constraint: '>= v1.24.10'
